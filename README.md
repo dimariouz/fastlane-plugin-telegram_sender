@@ -10,11 +10,18 @@ This project is a [_fastlane_](https://github.com/fastlane/fastlane) plugin. To 
 fastlane add_plugin telegram_sender
 ```
 
-## About telegram_sender
+## About telegram
 
-Allows post messages to telegram channel
+Allows post messages to telegram chats and topics
 
-**Note to author:** Add a more detailed description about this plugin here. If your plugin contains multiple actions, make sure to mention them here.
+```ruby
+telegram(
+  token: ENV['TG_BOT_TOKEN'], # get token from @BotFather
+  chat_id: ENV['TG_CHAT_ID'], # https://stackoverflow.com/questions/33858927/how-to-obtain-the-chat-id-of-a-private-telegram-channel
+  message_thread_id: ENV['TG_MESSAGE_THREAD_ID'], # message_thread_id for topic 
+  text: "Hello world, Telegram!" # Required
+)
+```
 
 ## Example
 
