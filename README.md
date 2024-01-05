@@ -18,7 +18,7 @@ Allows post messages to telegram chats and topics
 telegram(
   token: ENV['TG_BOT_TOKEN'], # get token from @BotFather
   chat_id: ENV['TG_CHAT_ID'], # https://stackoverflow.com/questions/33858927/how-to-obtain-the-chat-id-of-a-private-telegram-channel
-  message_thread_id: ENV['TG_MESSAGE_THREAD_ID'], # message_thread_id for topic 
+  message_thread_id: ENV['TG_MESSAGE_THREAD_ID'], # message_thread_id of topic 
   text: "Hello world, Telegram!" # Required
 )
 ```
