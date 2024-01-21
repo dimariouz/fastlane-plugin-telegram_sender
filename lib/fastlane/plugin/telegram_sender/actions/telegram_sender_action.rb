@@ -9,8 +9,11 @@ module Fastlane
         message_thread_id = params[:message_thread_id]
         text = params[:text]
         parse_mode = params[:parse_mode]
+        animation = params[:animation]
 
-        uri = URI.parse("https://api.telegram.org/bot#{token}/sendMessage")
+        method = (animation == nil ? "sendMessage" : "sendAnimation")
+        textParam = (animation == nil ? "text" : "caption")
+        uri = URI.parse("https://api.telegram.org/bot#{token}/#{method}")
         
         http = Net::HTTP.new(uri.host, uri.port)
         if params[:proxy]
@@ -24,7 +27,8 @@ module Fastlane
         { 
           "chat_id" => chat_id,
           "message_thread_id" => message_thread_id,
-          "text" => text,
+          "#{textParam}" => text,
+          "animation" => animation,
           "parse_mode" => parse_mode
         })
 
@@ -62,6 +66,11 @@ module Fastlane
                    FastlaneCore::ConfigItem.new(key: :message_thread_id,
                                            env_name: "TELEGRAM_MESSAGE_THREAD_ID",
                                         description: "Unique identifier for the target topic (not in the format @channel). For getting chat id you can send any message to your bot and get chat id from response https://api.telegram.org/botYOUR_TOKEN/getupdates",
+                                           optional: true,
+                                               type: String),
+                   FastlaneCore::ConfigItem.new(key: :animation,
+                                           env_name: "ANIMATION_ID",
+                                        description: "Pass a file_id as String to send an animation that exists on the Telegram servers",
                                            optional: true,
                                                type: String),
                    FastlaneCore::ConfigItem.new(key: :text,
